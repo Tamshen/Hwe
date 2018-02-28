@@ -17,8 +17,8 @@ if (($_FILES["file"]["size"] < get_cfg_var ("upload_max_filesize")?get_cfg_var (
     }
   else
     {
-      move_uploaded_file($_FILES["file"]["tmp_name"],
-      "../upload/" . $_FILES["file"]["name"]);
+      $name = iconv('utf-8','gb2312',"../upload/" . $_FILES["file"]["name"]); //利用Iconv函数对文件名进行重新编码
+      move_uploaded_file($_FILES["file"]["tmp_name"],$name);
       echo "<script>alert('上传成功！');history.go(-1)</script>";
     }
   }

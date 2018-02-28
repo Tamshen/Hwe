@@ -5,9 +5,10 @@
  * 
  */
 error_reporting(E_ALL & ~E_NOTICE);//报告除了警告以外的所有错误
+header("Content-Type:text/html;charset=utf-8");
 include './test.php'; //检测验证
 include './pass.php'; //用户数据
-define("hwev", "Beta 1.0.1（20180206）"); //程序版本号
+define("hwev", "Beta 1.0.2（20180206）"); //程序版本号
 include '../config.php'; //网站核心数据
 $hwegg = "http://api.hwe.xn--6qq986b3xl/hwe.json"; //程序公告数据地址./upload/hwe.json
 date_default_timezone_set("Asia/Chongqing");//时区
@@ -88,13 +89,14 @@ function themesset()
 //读取上传文件夹
 function upload_file()
 {	
-	$handler = opendir('../upload');
 	
+	$handler = opendir('../upload');
 	while( ($filename = readdir($handler)) !== false ) 
 	{	
  		if($filename != "." && $filename != "..")
 		{  
 		$size = (int)(filesize("../upload/".$filename ) / 1024);
+		$filename = iconv("gb2312","utf-8//IGNORE",$filename);
 		if (preg_match('/.(png|jpg|jpeg|bmp|svg)$/',$filename))
 		{
 			echo "<tr><td>".$filename."</td><td><input onfocus='this.select();' value='http://".$_SERVER['SERVER_NAME'].$GLOBALS['hwedz']."/upload/".$filename."' placeholder='http://".$_SERVER['SERVER_NAME'].$GLOBALS['hwedz']."/upload/".$filename."'></td><td>".$size."kb</td><td><a onclick=\"document.getElementById('upimgyl').src='http://".$_SERVER['SERVER_NAME'].$GLOBALS['hwedz']."/upload/".$filename."';document.getElementById('upimgyl').style='display:block'\">查看</a></td><td class='dl'><a href='upload_file.php?up=".$filename."'>删除</td></tr>";

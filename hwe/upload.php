@@ -5,6 +5,7 @@
  * 
  */
 include './data.php';
+header("Content-Type:text/html;charset=utf-8");
 $hwenr = file_get_contents($GLOBALS['hwegg']);
 $hwenrdata = json_decode($hwenr, true);
 if($hwenrdata["hwev"]==hwev)

@@ -1,0 +1,9 @@
+@charset "utf-8";
+*{margin: 0;padding: 0;-webkit-tap-highlight-color: transparent;  }
+body{font-size:25px;color:#FFF;font-family: "Source Sans Pro", sans-serif;}
+.main{text-align: center}
+.tittle{width:100%;top:0px;height:100%;z-index:0;position:absolute;position:fixed;display:none;cursor:default;}
+.big{font-family: "Source Sans Pro", sans-serif;color:#FFF;font-size:35px;}
+.tishi{position:absolute;position:fixed !important;z-index:99;bottom:10px;width:100%;text-align:center;}
+.tishiContent{border:1px solid #FFF;font-size:18px;padding:5px;cursor:pointer;border-radius:5px;}
+#zhdh{text-align: center;margin-top: 18%;display: none;}
