@@ -13,7 +13,7 @@ API is hosted on coding.
 
 
 # Themes
-PAY主题正常使用！
+PAY主题正常使用！（自适应问题，有时间将修复）
 
 Jiexi主题和520主题因[20180316][1]重大更新会错误！
 
