@@ -13,9 +13,9 @@ API is hosted on coding.
 
 
 # Themes
-Jiexi：Shi ping jie xi.
+PAY主题正常使用！
 
-520：Shi he biao bai de xiao wan yi.
+Jiexi主题和520主题因[20180316][1]重大更新会错误！
 
 
 # LICENSE
