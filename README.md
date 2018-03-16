@@ -5,15 +5,11 @@ SUI RAN XIE DE HEN LA JI,DAN YE KE YI YONG YONG!
 
 
 # Version
-Beta 1.0.2（20180206）
+20180316
 
 
-# Slow loading？ 
-Api server temporary fault！
-
-Into the home page will load slowly.
-
-emmmm😑
+# API？ 
+API is hosted on coding.
 
 
 # Themes
@@ -24,3 +20,15 @@ Jiexi：Shi ping jie xi.
 
 # LICENSE
 Mozilla Public License 2.0
+
+
+# Update log
+
+[20180316][1]
+
+
+
+
+
+
+  [1]: https://github.com/Tamshen/Hwe/commit/243139b86f6bc4e5ab9184f10f8bc8d0524430ac
