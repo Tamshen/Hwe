@@ -13,13 +13,13 @@ include './data.php'; //程序数据
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-    <title><?php echo $hwe; ?> - Tamshen</title>
+    <title><?php echo $hwe; ?> - Hwe</title>
     <link href="https://q.qlogo.cn/g?b=qq&nk=774024602@qq.com&s=100" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="./tamshen.css" data-for="result">
- </head>
- <body>
- <header class="caidan">
- 		<div class="container">
+</head>
+<body>
+<header class="caidan">
+ 	<div class="container">
  		<ul class="cdnav">
  			<li id="home" <?php if($hwe=="首页"){echo "class='hover'";} ?>><a href="./">首页</a> </li>
  			<?php themesset2(); ?>
@@ -28,12 +28,12 @@ include './data.php'; //程序数据
          </ul>
          <div class="you">
          <ul class="cdnav">
-             <li id="user" <?php if($hwe=="用户名"){echo "class='hover'";} ?>><a href="?hwe=user"><?php echo $用户名;?></a></li>
+             <li id="user" <?php if($hwe=="用户设置"){echo "class='hover'";} ?>><a href="?hwe=user"><?php echo $用户名;?></a></li>
              <li><a href="?hwe=out">登出</a></li>
-             <li><a href="../" target="_blank">网站</a></li>
+             <li><a href="<?php echo "//".$_SERVER['SERVER_NAME'],hwedz;?>" target="_blank">网站</a></li>
              </ul>
         </div>
- 		</div>
+ 	</div>
 </header>
 <div class="container" style="padding-top:60px">
 	<div class="houtai">
@@ -66,12 +66,11 @@ include './data.php'; //程序数据
 <!--用户设置end-->
 <?php } break;case "上传管理":{ //上传管理?>
 <!--上传管理-->
-
 <form action="upload_file.php?up=sc" method="post" enctype="multipart/form-data">
 	<p>
 		<label for="file">上传文件</label>
 		<input type="file" name="file" id="file"  class="w-100"/> 
-		<p class="description">最大上传限制：<?php echo get_cfg_var ("upload_max_filesize")?get_cfg_var ("upload_max_filesize"):"<script>alert('不允许上传附件！请检查服务器配置！');history.go(-1)</script>"; ?></p>
+		<p class="description">最大上传限制：<?php echo get_cfg_var ("upload_max_filesize")?get_cfg_var ("upload_max_filesize"):"<script>alert('不允许上传附件！请检查服务器配置！');window.close()</script>"; ?></p>
 		<p class="description">上传相同文件名将覆盖！</p>
 		<p class="description">文件名请不要有特殊字符！</p>
 	</p>
@@ -97,24 +96,24 @@ include './data.php'; //程序数据
 	<form method="post" action="save.php?hwesave=options">
 			<p>
 				<label for="hwedz">网站是否二级目录</label>
-				<input id="hwedz" type="text" name="hwedz" class="w-100" autocomplete="off" placeholder="<?php echo $hwedz;?>" value="<?php echo $hwedz;?>">
+				<input id="hwedz" type="text" name="hwedz" class="w-100" autocomplete="off" placeholder="<?php echo hwedz;?>" value="<?php echo hwedz;?>">
 				<p class="description">比如：/hwe（http://yoursite.com/hwe）  地址最后不要带“/”，不是二级目录请忽略留空！</p>
 			</p>
 			<p>
 				<label for="hwebt">网站标题</label>
-				<input id="hwebt" type="text" name="hwebt" class="w-100" autocomplete="off" placeholder="<?php echo $hwebt;?>" value="<?php echo $hwebt;?>">
+				<input id="hwebt" type="text" name="hwebt" class="w-100" autocomplete="off" placeholder="<?php echo hwebt;?>" value="<?php echo hwebt;?>">
 			</p>
 			<p>
 				<label for="hwezb">网站站标</label>
-				<input id="hwezb" type="text" name="hwezb" class="w-100" autocomplete="off" placeholder="<?php echo $hwezb;?>" value="<?php echo $hwezb;?>">
+				<input id="hwezb" type="text" name="hwezb" class="w-100" autocomplete="off" placeholder="<?php echo hwezb;?>" value="<?php echo hwezb;?>">
 			</p>
 			<p>
 				<label for="hwegjz">网站关键字（请用英文逗号,分隔！）</label>
-				<input id="hwegjz" type="text" name="hwegjz" class="w-100" autocomplete="off" placeholder="<?php echo $hwegjz;?>" value="<?php echo $hwegjz;?>">
+				<input id="hwegjz" type="text" name="hwegjz" class="w-100" autocomplete="off" placeholder="<?php echo hwegjz;?>" value="<?php echo hwegjz;?>">
 			</p>
 			<p>
 				<label for="hwejs">网站介绍</label>
-				<textarea id="hwejs" type="text" name="hwejs" class="w-100" autocomplete="off" placeholder="<?php echo $hwejs;?>"><?php echo $hwejs;?></textarea>
+				<textarea id="hwejs" type="text" name="hwejs" class="w-100" autocomplete="off" placeholder="<?php echo hwejs;?>"><?php echo hwejs;?></textarea>
 			</p>
 			<p>
 				<label for="hwezt">网站主题</label>
@@ -123,7 +122,7 @@ include './data.php'; //程序数据
      			</select>
      		</p>
 			<button type="submit" value="xiugai" class="btn w-100">确定</button>
-		</form>
+	</form>
 <!--基本设置end-->
 <?php } break;default:{ //首页?>	
 <!--首页 -->
@@ -139,9 +138,9 @@ include './data.php'; //程序数据
 	<div class="houtaixx">
 		<div class="title">系统信息</div>
 		<div class="xtxx">
-			<p>程序版本： <span><?php echo hwev;?></span> <a href="upload.php">（检测更新）</a></p>
+			<p>程序版本： <span><?php echo hwev;?></span> <a id="jcgx" href="upload.php"></a></p>
 			<p>系统时间：<span><?php echo date("Y-m-d G:i:s"); ?></span></p>
-			<p>网站地址：<span><?php if(empty($hwedz)){echo 'http://'.$_SERVER['SERVER_NAME']; echo dirname($url);}else {echo $hwedz;}?></span></p>
+			<p>网站地址：<span><?php echo $_SERVER['SERVER_NAME'],hwedz;?></span></p>
 			<p>服务器操作系统：<span> <?php echo PHP_OS; ?> </span></p>
 			<p>PHP程式版本： <span><?php echo PHP_VERSION; ?></span></p>
 			<p>最大上传限制：<span><?php echo get_cfg_var ("upload_max_filesize")?get_cfg_var ("upload_max_filesize"):"不允许上传附件"; ?> </span></p>

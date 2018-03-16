@@ -1,8 +1,8 @@
 <?php 
-	$hwedz='';
-	$hwebt='传奇动态 - VIP解析'; 
-	$hwezb='https://q.qlogo.cn/g?b=qq&nk=774024602@qq.com&s=100';
-	$hwegjz='传奇动态,mir2.live';
-	$hwejs='传奇动态VIP在线解析。';
-	$hwezt='/themes/520';
+	define("hwedz", "");
+	define("hwebt", "Hwe");
+	define("hwezb", "https://q2.qlogo.cn/headimg_dl?dst_uin=774024602&spec=100");
+	define("hwegjz", "Hwe");
+	define("hwejs", "Hwe，我爱你。");
+	define("hwezt", "/themes/pay");
 	?>

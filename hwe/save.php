@@ -11,7 +11,7 @@ switch ($hwe)
 case "themes":
 //主题设置开始
 $content='<?php return '.var_export($_POST,true).';';
-file_put_contents("../".$GLOBALS['hwezt']."/config.php", $content);
+file_put_contents("../".hwezt."/config.php", $content);
 echo "<script>alert('修改成功！');history.go(-1)</script>";
 //主题设置结束
 break;
@@ -23,12 +23,12 @@ if ($_POST['hwezt']=="THEMES")
 }
 else{
 $save233='<?php 
-	$hwedz=\''.$_POST['hwedz'].'\';
-	$hwebt=\''.$_POST['hwebt'].'\'; 
-	$hwezb=\''.$_POST['hwezb'].'\';
-	$hwegjz=\''.$_POST['hwegjz'].'\';
-	$hwejs=\''.$_POST['hwejs'].'\';
-	$hwezt=\''.$_POST['hwezt'].'\';
+	define("hwedz", "'.$_POST['hwedz'].'");
+	define("hwebt", "'.$_POST['hwebt'].'");
+	define("hwezb", "'.$_POST['hwezb'].'");
+	define("hwegjz", "'.$_POST['hwegjz'].'");
+	define("hwejs", "'.$_POST['hwejs'].'");
+	define("hwezt", "'.$_POST['hwezt'].'");
 	?>';
 file_put_contents('../config.php',$save233);	
 echo "<script>alert('修改成功！');history.go(-1)</script>";

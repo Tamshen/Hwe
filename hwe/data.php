@@ -5,14 +5,14 @@
  * 
  */
 error_reporting(E_ALL & ~E_NOTICE);//报告除了警告以外的所有错误
-header("Content-Type:text/html;charset=utf-8");
-include './test.php'; //检测验证
-include './pass.php'; //用户数据
-define("hwev", "Beta 1.0.2（20180206）"); //程序版本号
-include '../config.php'; //网站核心数据
-$hwegg = "http://api.hwe.xn--6qq986b3xl/hwe.json"; //程序公告数据地址./upload/hwe.json
 date_default_timezone_set("Asia/Chongqing");//时区
-//后代地址数据
+header("Content-Type:text/html;charset=utf-8");//utf8头
+include './test.php'; //验证
+include './pass.php'; //用户数据
+include '../config.php'; //网站核心数据
+define("hwev", "20180316"); //程序版本号
+$hwegg = "http://api.tamshen.com/hwe/hwe.json";//
+//后台地址数据
 $hwe=$_GET['hwe']==''?'':$_GET['hwe'];
 switch ($hwe){
 case "themes":$hwe="主题设置";break;
@@ -24,21 +24,35 @@ default:$hwe="首页";}
 //程序公告
 function gonggao()
 {	
-	$hwenr = file_get_contents($GLOBALS['hwegg']);
-	$hwenrdata = json_decode($hwenr, true);
-	$i=1;
-	while($i<=$hwenrdata["gonggaot"])
+	$header = get_headers($GLOBALS['hwegg'], true);
+	if(isset($header[0]) && (strpos($header[0], '200') || strpos($header[0], '304')))
+	{
+		$hwenr = file_get_contents($GLOBALS['hwegg']);
+		$hwenrdata = json_decode($hwenr, true);
+		$i=1;
+		while($i<=$hwenrdata["gonggaot"])
 		{
     		echo '<p><a target="_blank" style="'.$hwenrdata["gonggao"]["$i"]["ys"].'" href="'.$hwenrdata["gonggao"]["$i"]["lj"].'">'.$hwenrdata["gonggao"]["$i"]["nr"].'</a></p>';
     		$i++;
 		}
+		if($hwenrdata["hwev"] <= hwev){
+			echo '<script>var jcgx="";</script>';
+		}else{
+			echo '<script>var jcgx="（更新到新版本：'.$hwenrdata["hwev"].'）";</script>';
+		}
+		
+	}
+	else
+	{
+		echo "无法读取公告和更新哇！嘤嘤嘤！";
+	}
 }
 //基本设置 主题目录
 function themes()
 {	
 	$tdz="../themes";
 	$list = scandir($tdz);
-	if ($GLOBALS['hwezt']=="THEMES")
+	if (hwezt=="THEMES")
 	{
     foreach($list as $file){
         $file_location=$tdz."/".$file;
@@ -58,14 +72,14 @@ function themes()
             
         }  
     }
-    echo '<option value="'.$GLOBALS['hwezt'].'" selected="selected">当前主题：'.$GLOBALS['hwezt'].'</option>';
+    echo '<option value="'.hwezt.'" selected="selected">当前主题：'.hwezt.'</option>';
 	}
     
 }
 //是否有主题设置
 function themesset2()
 {	
-	if(file_exists("../".$GLOBALS['hwezt']."/functions.php")){
+	if(file_exists("..".hwezt."/functions.php")){
 		if($GLOBALS['hwe']=="主题设置")
 		{
 			echo '<li id="themes" class="hover"><a href="?hwe=themes">主题设置</a> </li>';
@@ -80,9 +94,9 @@ function themesset2()
 //读取主题设置
 function themesset()
 {	
-	$tdata=include("../".$GLOBALS['hwezt']."/config.php");//读取主题设置的内容
+	$t=include("..".hwezt."/config.php");//读取主题设置的内容
 	echo '<form method="post" action="save.php?hwesave=themes">';
-	include "../".$GLOBALS['hwezt']."/functions.php";//读取主题设置的内容
+	include "..".hwezt."/functions.php";//读取主题设置的内容
 	echo '<button type="submit" class="btn w-100">确定</button>';
 	echo '</form>';
 }
@@ -99,17 +113,17 @@ function upload_file()
 		$filename = iconv("gb2312","utf-8//IGNORE",$filename);
 		if (preg_match('/.(png|jpg|jpeg|bmp|svg)$/',$filename))
 		{
-			echo "<tr><td>".$filename."</td><td><input onfocus='this.select();' value='http://".$_SERVER['SERVER_NAME'].$GLOBALS['hwedz']."/upload/".$filename."' placeholder='http://".$_SERVER['SERVER_NAME'].$GLOBALS['hwedz']."/upload/".$filename."'></td><td>".$size."kb</td><td><a onclick=\"document.getElementById('upimgyl').src='http://".$_SERVER['SERVER_NAME'].$GLOBALS['hwedz']."/upload/".$filename."';document.getElementById('upimgyl').style='display:block'\">查看</a></td><td class='dl'><a href='upload_file.php?up=".$filename."'>删除</td></tr>";
+			echo "<tr><td>".$filename."</td><td><input onfocus='this.select();' value='http://".$_SERVER['SERVER_NAME'].hwedz."/upload/".$filename."' placeholder='http://".$_SERVER['SERVER_NAME'].hwedz."/upload/".$filename."'></td><td>".$size."kb</td><td><a onclick=\"document.getElementById('upimgyl').src='http://".$_SERVER['SERVER_NAME'].hwedz."/upload/".$filename."';document.getElementById('upimgyl').style='display:block'\">查看</a></td><td class='dl'><a href='upload_file.php?up=".$filename."'>删除</td></tr>";
 		
 		}
 		else
-		{echo "<tr><td>".$filename."</td><td><input onfocus='this.select();' value='http://".$_SERVER['SERVER_NAME'].$GLOBALS['hwedz']."/upload/".$filename."' placeholder='http://".$_SERVER['SERVER_NAME'].$GLOBALS['hwedz']."/upload/".$filename."'><td>".$size."kb</td><td></td></td><td class='dl'><a href='upload_file.php?up=".$filename."'>删除</td></tr>";}
+		{echo "<tr><td>".$filename."</td><td><input onfocus='this.select();' value='http://".$_SERVER['SERVER_NAME'].hwedz."/upload/".$filename."' placeholder='http://".$_SERVER['SERVER_NAME'].hwedz."/upload/".$filename."'><td>".$size."kb</td><td></td></td><td class='dl'><a href='upload_file.php?up=".$filename."'>删除</td></tr>";}
   		}
 	}
 }
 //程序后台js log 版权
 function copyright()
 {
-    echo '<script>console.log("\n %c © Hwe '. hwev .' | Tamshen ","color:#ffffff;    background-image: linear-gradient(to right, #2aa8f2, #9db1fa);line-height: 8;padding:5px 0;border-radius:5px;")</script>';
+    echo '<script>if (jcgx.replace(/(^s*)|(s*$)/g, "").length ==0){}else{document.getElementById("jcgx").innerHTML=jcgx;};console.log("\n %c © Hwe '. hwev .' | Tamshen ","color:#ffffff;    background-image: linear-gradient(to right, #2aa8f2, #9db1fa);line-height: 8;padding:5px 0;border-radius:5px;")</script>';
 }
 ?>
