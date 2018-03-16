@@ -17,6 +17,9 @@ PAY主题正常使用！（自适应问题，有时间将修复）
 
 Jiexi主题和520主题因[20180316][1]重大更新会错误！
 
+如何做主题？[点我][2]
+
+
 
 # LICENSE
 Mozilla Public License 2.0
@@ -32,3 +35,4 @@ Mozilla Public License 2.0
 
 
   [1]: https://github.com/Tamshen/Hwe/commit/243139b86f6bc4e5ab9184f10f8bc8d0524430ac
+  [2]: https://github.com/Tamshen/Hwe/wiki/%E5%85%B3%E4%BA%8E%E4%B8%BB%E9%A2%98%E5%88%B6%E4%BD%9C
