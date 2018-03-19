@@ -66,16 +66,22 @@
 	//?de=文件名&mm=密码
 	elseif ($_GET['de']==''?'':$_GET['de']) 
 	{
-		$file = ".".hwezt."/data/".$_GET["de"].".json";
-		if(is_file($file))
-  			{	$sj  = file_get_contents($file);
-				$paydata = json_decode($sj, true);
-  				if($paydata["mm"]  == $_GET['mm']){	
-  					if (!unlink($file)){echo "<script>alert('删除错误！请检查服务器设置！');history.go(-1)</script>";}
-                	else{echo "<script>alert('删除成功！');history.go(-1)</script>";}}
-                else{echo "<script>alert('删除密码错误！');history.go(-1)</script>";}
-  			}
-		else{echo "<script>alert('Excuse me?没有这个文件！');history.go(-1)</script>";}
+		if (empty($t["dl"])) {
+			echo "<script>alert('当前配置禁止删除！请联系网站管理员！');window.close()</script>";
+		}
+		else
+		{
+			$file = ".".hwezt."/data/".$_GET["de"].".json";
+			if(is_file($file))
+  				{	$sj  = file_get_contents($file);
+					$paydata = json_decode($sj, true);
+  					if($paydata["mm"]  == $_GET['mm']){	
+  						if (!unlink($file)){echo "<script>alert('删除错误！请检查服务器设置！');history.go(-1)</script>";}
+                		else{echo "<script>alert('删除成功！');history.go(-1)</script>";}}
+                	else{echo "<script>alert('删除密码错误！');history.go(-1)</script>";}
+  				}
+			else{echo "<script>alert('Excuse me?没有这个文件！');history.go(-1)</script>";}
+		}
 	}
   	//新建
   	elseif ($_GET['ts']==''?'':$_GET['ts']) 
@@ -105,6 +111,29 @@
   	//新建--end
   	else {?>
 <!--管理页面-->
+<style>
+a{text-decoration: none;cursor: pointer;}
+.gonggao{top: 20%;position: fixed;right: 0;left: 0;z-index: 6000;min-width: 180px;max-width: 728px;box-sizing: border-box;margin: auto;overflow: hidden;color: #000;background-color: #fff;border-radius: 2px;-webkit-box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);}
+.gonggao .title{-webkit-box-sizing: border-box;box-sizing: border-box;font-size: 20px;font-weight: bold;line-height: 24px;text-align: left;padding: 24px 24px 20px 24px;}
+.gonggao .content{-webkit-box-sizing: border-box;box-sizing: border-box;padding: 0 24px;overflow-y: auto;font-size: 15px;line-height: 1.5;color: rgba(0,0,0,.7);}
+.gonggao .foot{-webkit-box-sizing: border-box;box-sizing: border-box;padding: 8px;text-align: right;}
+.gonggao .foot .qd{min-width: 64px;height: 36px;position: relative;display: inline-block;-webkit-box-sizing: border-box;box-sizing: border-box;padding: 0 16px;margin: 0;overflow: hidden;font-size: 14px;font-weight: 500;line-height: 36px;color: inherit;}
+@media (max-width: 800px){
+	.gonggao{top: 10%;width: 92%;}
+	input[type=text], textarea {width: 97%;padding: 1%;}
+	#de .s {width: 100%;}
+	#de input {width: 97%;}
+	}
+</style>
+<?php if (empty($t["gg"])) {}else{ ?>
+<div class="gonggao" id="gg">
+	<div class="title"><?php echo $t["ggbt"];?></div>	
+	<div class="content">
+		<?php echo $t["ggnr"];?>	
+	</div>
+	<div class="foot"><a class="qd" onclick="document.getElementById('gg').style.display='none'">确定</a></div>
+</div>	
+<?php }?>
 <form method = "post" action = "?ts=save">
 <div id="set">
 	<a href="<?php echo $surl; ?>"><img src="<?php echo $turl; ?>/ico.png" /></a>
@@ -133,7 +162,7 @@
 <button type="submit" class="btn">确定</button>
 </div>
 </form>
-
+<?php if (empty($t["dl"])) {}else{ ?>
 <div class="set" id="de">
 	<div class="de-title"></div>
 	<label for="dedz">删除</label>
@@ -145,6 +174,7 @@
 <div id="set" style="margin-top: 20px;">
 	<a><button onclick="de233()" class="btn" style="background: #FF5722;">删除</button></a>
 </div>
+<?php }?>
 <div class="footer">Copyright <?php echo date("Y"); ?> <?php echo hwebt; ?>.</div>
  <script>
  document.body.style.backgroundColor="#f2f2f2";
@@ -158,13 +188,17 @@
     }
 </script>
 <!--管理页面end-->
-<?php }?>	
+<?php }?>
+<?php echo $t["zdyjb"];?>
 </body>
 </html>
 <?php 
 function cjxg()
 {	
-  	echo '<div id="set">
+  	echo '
+  	<style>
+  	@media (max-width: 800px){input[type=text], textarea {width: 97%;padding: 1%;}}</style>
+  	<div id="set">
   			<a href="'.$GLOBALS['surl'].'"><img src="'.$GLOBALS['turl'].'/ico.png"></a>
 				<label style="color:#000;">在线地址：</label>
 				<input type="text" readonly="readonly" onfocus="this.select();" value="http:'.$GLOBALS['surl'].hwedz.'/?id='.$_POST['zdydz'].'">
