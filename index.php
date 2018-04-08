@@ -9,11 +9,8 @@
 error_reporting(E_ALL & ~E_NOTICE);//报告除了警告以外的所有错误
 date_default_timezone_set("Asia/Chongqing");//时区
 include './config.php'; //引入网站核心数据
-$surl = '//'.$_SERVER['SERVER_NAME'],hwedz; //网站地址 包括自定义地址后
-$turl = $surl.hwedz.hwezt; //主题地址
+$surl = '//'.$_SERVER['SERVER_NAME'].hwedz; //网站地址
+$turl = $surl.hwezt; //主题地址
 $t = include(".".hwezt."/config.php");//引入主题数据文件
 include ".".hwezt."/index.php";//读取主题文件
 ?>
-
-
-
