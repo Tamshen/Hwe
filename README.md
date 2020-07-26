@@ -1,7 +1,5 @@
 # Hwe 
-My first PHP project, Gadgets！
-
-SUI RAN XIE DE HEN LA JI,DAN YE KE YI YONG YONG!
+我的第一个PHP Demo.
 
 
 # Version
